@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="{% static 'purple.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <img src="https://wallpaperbat.com/img/269478-space-fantasy-wallpaper-for-iphone.jpg" alt="Creative Portrait" />
+    </div>
+    <div class="right-panel">
+      <form method="POST">
+        {% csrf_token %}
+        <h2>Enter your details</h2>
+
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="admission_number" placeholder="Admission Number" required />
+        <input type="text" name="branch" placeholder="Branch" required />
+        <input type="number" name="year" placeholder="Year" required />
+        <input type="text" name="contact_number" placeholder="Contact Number" required />
+        <input type="text" name="component_name" placeholder="Component Name" required />
+        <input type="text" name="componentissue_date" placeholder="Component Issue Date" required />
+        <input type="text" name="componentdue_date" placeholder="Component Due Date" required />
+        <input type="text" name="faculty_referred" placeholder="Faculty Referred" required />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      {% if success %}
+        <p style="color: green;">✔️ Form submitted successfully!</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
