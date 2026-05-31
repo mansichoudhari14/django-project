@@ -22,7 +22,7 @@ def register(request):
         componentdue_date = request.POST.get('componentdue_date')
         faculty_referred = request.POST.get('faculty_referred')
 
-        if not email.endswith("@mes.student.ac.in"):
+        if not email.endswith("student.mes.ac.in"):
             return render(request, "furm.html", {
                 'error': 'Only MES email IDs are allowed.'
             })
@@ -65,27 +65,26 @@ def signup_view(request):
 
         password = request.POST["password"]
 
-        User.objects.create_user(
-            username=username,
-            email=email,
-            password=password
-        )
-
         if User.objects.filter(email=email).exists():
          return render(
         request,
         "signup.html",
         {"error": "An account with this email already exists."}
     )
-        return redirect("/login.html/")
+
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+
+        return redirect("/login/")
 
     return render(request, "signup.html")
 
 
     
-def login_user(request):
-    print(request.user.username)
-    print(request.user.email)   
+def login_user(request): 
 
     if request.method == "POST":
 
@@ -101,8 +100,10 @@ def login_user(request):
                 username=user_obj.username,
                 password=password
             )
+            print ("USER=",user)
 
             if user is not None:
+                print("LOGIN SUCCESS")
                 login(request, user)
                 return redirect("/furm.html/")
 
@@ -111,6 +112,7 @@ def login_user(request):
                 "login.html",
                 {"error": "Incorrect password."}
             )
+        
 
         except User.DoesNotExist:
 
@@ -119,5 +121,6 @@ def login_user(request):
                 "login.html",
                 {"error": "No account found with this email, kindly Register."}
             )
+        
 
     return render(request, "login.html")
