@@ -4,8 +4,8 @@ from django.db import models
 
 class Student(models.Model):
     name = models.TextField()
-    email = models.EmailField(unique=True)
-    admission_number = models.TextField(unique=True)
+    email = models.EmailField()
+    admission_number = models.TextField()
     branch = models.TextField()
     year = models.IntegerField()
     contact_number = models.BigIntegerField()
